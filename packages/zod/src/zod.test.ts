@@ -749,7 +749,9 @@ describe('generateZodValidationSchemaDefinition`', () => {
         false,
         false,
       );
-      expect(parsed.zod).toBe('zod.literal(1).or(zod.literal(2)).optional()');
+      expect(parsed.zod).toBe(
+        'zod.union([zod.literal(1),zod.literal(2)]).optional()',
+      );
     });
 
     it('generates an enum for a boolean', () => {
@@ -789,7 +791,7 @@ describe('generateZodValidationSchemaDefinition`', () => {
         false,
       );
       expect(parsed.zod).toBe(
-        'zod.literal(true).or(zod.literal(false)).optional()',
+        'zod.union([zod.literal(true),zod.literal(false)]).optional()',
       );
     });
 
@@ -830,7 +832,7 @@ describe('generateZodValidationSchemaDefinition`', () => {
         false,
       );
       expect(parsed.zod).toBe(
-        "zod.literal('cat').or(zod.literal(1)).or(zod.literal(true)).optional()",
+        "zod.union([zod.literal('cat'),zod.literal(1),zod.literal(true)]).optional()",
       );
     });
   });
